@@ -1,34 +1,32 @@
-package conubiodiclassi2;
+package esercizio10;
+
+import java.util.Comparator;
 
 public class Persona {
-    private final String nome;
-    private final String cognome;
-    private final int eta;
-    public Persona(String nome, String cognome,int intero){
+    private String nome;
+    private String cognome;
+    private int eta;
+
+    public Persona(String nome,String cognome,int eta){
         this.nome = nome;
         this.cognome = cognome;
-        this.eta=intero;
+        this.eta=eta;
     }
-
-    public static Persona creaCostruttore(String nomeCognome,int intero){
-        String[] nome = nomeCognome.split(";");
-        return new Persona(nome[0],nome[1],intero);
-    }
-    public static Persona creaCostruttore(String nomeCognomeEta){
-        String[] nome = nomeCognomeEta.split(" ");
-        return new Persona(nome[0],nome[1],Integer.parseInt(nome[2]));
-    }
-    public String getNome() {
+    public String getNome(){
         return this.nome;
     }
-    public  String getCognome () {
+    public String getCognome() {
         return this.cognome;
     }
-
-    @Override
-    public String toString() {
-        return "\n" + this.nome +
-                "\n" + this.cognome +
-                "\n" + this.eta;
+    public int getEta(){return this.eta;}
+    public void presentati(){
+        System.out.print(("Piacere, mi chiamo " + this.nome + " " + this.cognome ));
     }
+
+    private static Comparator<Persona> etaComp =
+            (persona1, persona2) -> Integer.compare(persona1.getEta(),persona2.getEta());
+    private static Comparator<Persona> nomeComp =
+            (persona1, persona2) -> persona1.getNome().compareTo(persona2.getNome());
+    private static Comparator<Persona> cognomeComp =
+            (persona1, persona2) -> persona1.getCognome().compareTo((persona2.getCognome()));
 }
